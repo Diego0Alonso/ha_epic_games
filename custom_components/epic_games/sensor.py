@@ -187,6 +187,9 @@ class EpicGamesSensor(Entity):
                         airdate=game["viewableDate"].split("T")[0],
                     )
                     for game in parsed_games
+		    if game.get("promotions") and game["promotions"].get("promotionalOffers")
+		    and game.get("price",{}).get("totalPrice", {}).get("originalPrice", 0)
+		    == game.get("price", {}).get("totalPrice", {}).get("discount", -1)
                 ]
             )
 
